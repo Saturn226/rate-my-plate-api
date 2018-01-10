@@ -12,11 +12,13 @@ class Api::PlatesController < ApplicationController
     def upvote
         set_plate
         @plate.liked_by current_user
+        render json: { upvotes: @plate.upvote_count, downvotes: @plate.downvote_count}
     end
 
     def downvote
         set_plate
        @plate.unliked_by current_user
+       render json: { upvotes: @plate.upvote_count , downvotes: @plate.downvote_count}
     end
 
     def create
