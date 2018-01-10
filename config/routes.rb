@@ -6,5 +6,7 @@ Rails.application.routes.draw do
     post '/signup', to: 'users#signup'
     post '/login', to: 'sessions#login'
     post '/logout', to: 'sessions#logout'
+    post 'plates/:id/upvote', to: 'plates#upvote'
+    post 'plates/:id/downvote', to: 'plates#downvote'
   end
 end

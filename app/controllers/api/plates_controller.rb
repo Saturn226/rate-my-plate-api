@@ -10,15 +10,17 @@ class Api::PlatesController < ApplicationController
     end
 
     def upvote
-        #@plate.liked_by current_user
+        set_plate
+        @plate.liked_by current_user
     end
 
     def downvote
-       # @plate.unliked_by current_user
+        set_plate
+       @plate.unliked_by current_user
     end
 
     def create
-        plate = Plate.new(plate_params)
+        plate = current_user.plates.build(plate_params)
         if plate.save
             render json: plate
         else
@@ -28,9 +30,9 @@ class Api::PlatesController < ApplicationController
 
     def update
        if @plate.update(plate_params)
-        render json: {message: "Successfully deleted dish"}, status: 200
+        render json: {message: "Successfully updated dish"}, status: 200
        else
-        render json: {message: "Unable to delete"}, status: 400
+        render json: {message: "Unable to update"}, status: 400
        end
     end
 
@@ -50,5 +52,5 @@ def set_plate
 end
 
 def plate_params
-    params.require(:plate).permit(:name, :description, :img_url, :upvote, :downvote, :user_id)
+    params.require(:plate).permit(:name, :description, :img_url, :user_id)
 end
