@@ -1,5 +1,5 @@
 class Api::PlatesController < ApplicationController
-    before_action :set_plate, only: [:show, :update, :destroy]
+    before_action :set_plate, only: [:show, :update, :destroy, :upvote, :downvote]
 
     def index
         render json: Plate.all
@@ -7,6 +7,14 @@ class Api::PlatesController < ApplicationController
 
     def show
        render json: @plate
+    end
+
+    def upvote
+        #@plate.liked_by current_user
+    end
+
+    def downvote
+       # @plate.unliked_by current_user
     end
 
     def create
