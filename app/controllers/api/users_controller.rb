@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class Api::UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy]
 
   # GET /users
@@ -11,6 +11,15 @@ class UsersController < ApplicationController
   # GET /users/1
   def show
     render json: @user
+  end
+
+  def signup
+    user = User.new(user_params)
+    if user.save
+      render json: {token: Auth.createToken(user)}
+    else
+      render json: {errors: user.errors.full_messages}, status: 500
+    end
   end
 
   # POST /users
@@ -46,6 +55,6 @@ class UsersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(:username, :first_name, :last_name)
+      params.require(:user).permit(:username, :first_name, :last_name, :password)
     end
 end
