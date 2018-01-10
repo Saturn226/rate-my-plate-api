@@ -1,4 +1,4 @@
-#GET api/plates
+<!-- # GET api/plates
 #GET api/plate/:id
 #GET api/plates/new
 #POST api/plates
@@ -23,7 +23,7 @@
 
 #User
 #username
-#plates
+#plates -->
 
 <!-- # README
 
