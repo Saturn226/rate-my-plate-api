@@ -16,7 +16,7 @@ class Api::UsersController < ApplicationController
   def signup
     user = User.new(user_params)
     if user.save
-      render json: {token: Auth.createToken(user)}
+      render json: {token: Auth.create_token(user.id)}
     else
       render json: {errors: user.errors.full_messages}, status: 500
     end
@@ -24,13 +24,18 @@ class Api::UsersController < ApplicationController
 
   # POST /users
   def create
-    @user = User.new(user_params)
-
-    if @user.save
-      render json: @user, status: :created, location: @user
+    user = User.new(user_params)
+    if user.save
+      render json: {token: Auth.create_token(user.id)}
     else
-      render json: @user.errors, status: :unprocessable_entity
+      render json: {errors: user.errors.full_messages}, status: 500
     end
+
+    # if @user.save
+    #   render json: @user, status: :created, location: @user
+    # else
+    #   render json: @user.errors, status: :unprocessable_entity
+    # end
   end
 
   # PATCH/PUT /users/1

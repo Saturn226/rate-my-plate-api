@@ -1,10 +1,11 @@
 require 'jwt'
 
 class Auth
-    def self.create_token(user_object)
-        payload = {user: JSON.parse(user_object.to_json)}
+    def self.create_token(user_id)
+        payload = {user_id: user_id}
+        #payload = {user: JSON.parse(user_object.to_json)}
         token = JWT.encode(payload, 'myapp', 'HS256')
-        decode_token(token)
+      #  decode_token(token)
     end
 
     def self.decode_token(token)
