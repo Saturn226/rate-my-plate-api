@@ -8,5 +8,6 @@ Rails.application.routes.draw do
     post '/logout', to: 'sessions#logout'
     post 'plates/:id/upvote', to: 'plates#upvote'
     post 'plates/:id/downvote', to: 'plates#downvote'
+    get 'plates/:id/votes', to: 'plates#votes'
   end
 end
