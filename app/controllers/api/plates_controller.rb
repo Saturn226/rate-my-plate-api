@@ -58,8 +58,8 @@ private
 
 def set_plate
     @plate = Plate.find_by(id: params[:id])
-    @plate = JSON.parse(@plate.to_json)
-        .merge(upvote: @plate.upvote_count, downvote: @plate.downvote_count)
+    # @plate = JSON.parse(@plate.to_json)
+    #     .merge(upvote: @plate.upvote_count, downvote: @plate.downvote_count)
 end
 
 def plate_params
