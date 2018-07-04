@@ -2,11 +2,19 @@ class Plate < ApplicationRecord
     belongs_to :user
     acts_as_votable
 
-    def upvote_count
-        self.votes_for.up.count
+    def upvotes
+        self.votes_for.up#.count
     end
 
-    def downvote_count
-        self.votes_for.down.count
+    def downvotes
+        self.votes_for.down#.count
+    end
+
+    def upvotes_count
+        upvotes.count
+    end
+
+    def downvotes_count
+        downvotes.count
     end
 end

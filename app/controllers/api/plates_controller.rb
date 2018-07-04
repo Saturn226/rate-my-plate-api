@@ -6,26 +6,33 @@ class Api::PlatesController < ApplicationController
     end
 
     def show
-        # @plate = JSON.parse(@plate.to_json)
-        # .merge(upvote: @plate.upvote_count, downvote: @plate.downvote_count)
-        set_plate
+       set_plate
        render json: @plate
     end
+
     def upvote
         set_plate
+        
         @plate.upvote_from current_user
-        render json: { upvotes: @plate.upvote_count, downvotes: @plate.downvote_count}
+
+       # if @plate.upvotes.last
+           render json: @plate.upvotes.last
+        # else
+        #     render json: {message: @plate.errors}, status: 400
+        # end
+        #render json: { upvotes: @plate.upvote_count, downvotes: @plate.downvote_count}
     end
 
     def votes
         set_plate
-        render json: { upvotes: @plate.upvote_count, downvotes: @plate.downvote_count}
+        render json: { upvotes: @plate.upvotes_count, downvotes: @plate.downvotes_count}
     end
 
     def downvote
         set_plate
        @plate.downvote_from current_user
-       render json: { upvotes: @plate.upvote_count , downvotes: @plate.downvote_count}
+       render json: @plate.downvotes.last
+       #render json: { upvotes: @plate.upvotes_count , downvotes: @plate.downvotes_count}
     end
 
     def create
@@ -58,8 +65,6 @@ private
 
 def set_plate
     @plate = Plate.find_by(id: params[:id])
-    # @plate = JSON.parse(@plate.to_json)
-    #     .merge(upvote: @plate.upvote_count, downvote: @plate.downvote_count)
 end
 
 def plate_params

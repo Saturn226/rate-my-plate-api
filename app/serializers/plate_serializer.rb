@@ -1,10 +1,10 @@
 class PlateSerializer < ActiveModel::Serializer
   attributes *Plate.column_names, :upvotes, :downvotes
   def upvotes
-    object.upvote_count
+    object.upvotes
   end
 
   def downvotes
-    object.downvote_count
+    object.downvotes
   end
 end
